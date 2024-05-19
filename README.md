@@ -55,8 +55,7 @@ The project is processed and analyzed according to the flow below
   <img src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/ee48fbe1-b251-470d-a442-de8d185d041e" alt="anh6" width ="503px">
 </div>
 
-Coding DeTails Here 
-[Click Here](https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/blob/main/final_fucntion_procedure_prameter_final_report.sql)
+[Coding DeTails Here](https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/blob/main/final_fucntion_procedure_prameter_final_report.sql)
 
 
 
