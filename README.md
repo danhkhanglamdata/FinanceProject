@@ -71,7 +71,7 @@ The project is processed and analyzed according to the flow below
 
 Processing this project requires combining various business knowledge areas. I will explain in more detail below⬇
 
-[Coding DeTails Here](https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/blob/main/final_fucntion_procedure_prameter_final_report.sql)
+[Coding DeTails Here](https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/blob/main/Detail.md)
 
 
 
