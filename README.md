@@ -11,19 +11,31 @@ This project utilizes data that closely mirrors the financial data of real Vietn
 ## 2.Result 
 A summary dashboard reporting monthly results in Power BI
 
-<img width="696" alt="anh1" src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/db1e8a8b-0ea7-409c-8237-97d46141c3c6">
+<div align="center">
+  <img src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/db1e8a8b-0ea7-409c-8237-97d46141c3c6" alt="anh1" >
+</div>
 
 Detailed dashboards on overview , revenue and expenses
+<div align="center">
+  <img src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/b6073e9a-583e-478b-95dc-0939b1596f6e" alt="anh1" >
+</div>
 
-<img width="604" alt="anh2" src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/b6073e9a-583e-478b-95dc-0939b1596f6e" align="center">
+<div align="center">
+  <img src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/77c91e08-6ea8-4f25-b919-9bcb13ba27c9" alt="anh2" >
+</div>
 
-<img width="602" alt="anh3" src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/77c91e08-6ea8-4f25-b919-9bcb13ba27c9" align="center">
+<div align="center">
+  <img src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/12f7486a-301c-4d3e-ae1d-07800eb2935f" alt="anh3" >
+</div>
 
-<img width="605" alt="anh4" src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/12f7486a-301c-4d3e-ae1d-07800eb2935f" align="center">
 
 Dashboards reporting the performance of the sales team
 
-<img width="607" alt="anh5" src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/095738c0-3166-4e78-bdd3-e9ef4e10ecaa" align="center">
+<div align="center">
+  <img src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/095738c0-3166-4e78-bdd3-e9ef4e10ecaa" alt="anh4" >
+</div>
+
+
 
 
 
