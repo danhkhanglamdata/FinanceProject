@@ -1,7 +1,15 @@
 # Finance Project & Sales KPI
-[Final Report - Power Bi](https://app.powerbi.com/view?r=eyJrIjoiMjI3YjE3MTUtYTVmNy00YjQ1LTkzZmYtYmU0NzBmNzU0ZjNkIiwidCI6IjZhYzJhZDA2LTY5MmMtNDY2My1iN2FmLWE5ZmYyYTg2NmQwYyIsImMiOjEwfQ%3D%3D)
+
+Please see this Coding file here : [Coding Details](https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/blob/main/final_fucntion_procedure_prameter_final_report.sql)
+
+Final Result here : [Final Report - Power Bi](https://app.powerbi.com/view?r=eyJrIjoiMjI3YjE3MTUtYTVmNy00YjQ1LTkzZmYtYmU0NzBmNzU0ZjNkIiwidCI6IjZhYzJhZDA2LTY5MmMtNDY2My1iN2FmLWE5ZmYyYTg2NmQwYyIsImMiOjEwfQ%3D%3D)
 
 ## Table of Contents
+- [Introduction](#introduction)
+- [Result](#result)
+- [Tool&Dataset](#tool&dataset)
+- [Detailed Approach](#detailed-approach)
+
 
 ## 1.Introduction 
 ---
@@ -38,7 +46,7 @@ Dashboards reporting the performance of the sales team
   <img src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/095738c0-3166-4e78-bdd3-e9ef4e10ecaa" alt="anh4" >
 </div>
 
-## Tool & DataSet 
+## Tool&DataSet 
 Tool 
   - PostgreSQL
   - Power Bi
