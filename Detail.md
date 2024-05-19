@@ -347,6 +347,240 @@ Below is a diagram illustrating the calculation process in step 2.
   <img src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/8feb04ed-bad8-421d-b4f5-bae221718150" alt="anh8" width="600px">
 </div>
 
+After constructing Report1, I will utilize a function to create temporary tables for calculating level 2 metrics based on the level 1 metrics data from Report1. Subsequently, I will employ a procedure to compute aggregate metrics and generate the summary report
+
+Now, I will create a function to calculate the two metrics, cp_von_tt2 and cp_von_cctg, from Report1.
+
+~~~sql
+create or replace function cp(month_pram int) 
+returns void 
+as 
+$$ 
+begin 
+	-- Tạo bảng tạm tính cp_cctg 
+	create temp table cp_cctgg as 
+	with head as (
+	select 
+		sum(amount) as total_head 
+	from fact_txn_month_raw_data_xlsx ftmrdx 
+	where extract(year from transaction_date) = 2023 
+		and extract(month from transaction_date) <= month_pram
+		and analysis_code like 'HEAD%'
+		and account_code  = 803000000001 ) 
+	, step1 as (
+	select 
+		tenkhuvuc , 
+		lai_trong_han + lai_qua_han + phi_bao_hiem + phi_tang_han_muc + phi_thanh_toan_cham as thu_nhap_tu_hd_the , 
+		sum(doanhthu_kinhdoanh) over() as total_dt_kinhdoanh
+	from report1 ) 
+	, step2 as (
+	select 
+		tenkhuvuc , 
+		thu_nhap_tu_hd_the  , 
+		sum(thu_nhap_tu_hd_the) over() as total_thunhap_hdthe , 
+		total_dt_kinhdoanh 
+	from step1 ) 
+	
+	select 
+		tenkhuvuc , 
+		((select total_head from head ) * thu_nhap_tu_hd_the / (total_thunhap_hdthe+total_dt_kinhdoanh)) as cp_von_CCTG
+	from step2 ;
+
+	-- Bảng tạm tính cp_tt2 
+	create temp table cp_tt22 as 
+	with head as (
+	select 
+		sum(amount) as total_head 
+	from fact_txn_month_raw_data_xlsx ftmrdx 
+	where extract(year from transaction_date) = 2023 
+		and extract(month from transaction_date) <= month_pram
+		and analysis_code like 'HEAD%'
+		and account_code  in (801000000001,802000000001))
+	, step1 as (
+	select 
+		tenkhuvuc , 
+		lai_trong_han + lai_qua_han + phi_bao_hiem + phi_tang_han_muc + phi_thanh_toan_cham as thu_nhap_tu_hd_the , 
+		sum(doanhthu_kinhdoanh) over() as total_dt_kinhdoanh
+	from report1 ) 
+	, step2 as (
+	select 
+		tenkhuvuc , 
+		thu_nhap_tu_hd_the  , 
+		sum(thu_nhap_tu_hd_the) over() as total_thunhap_hdthe , 
+		total_dt_kinhdoanh 
+	from step1 ) 
+	select 
+		tenkhuvuc , 
+		((select total_head from head ) * thu_nhap_tu_hd_the / (total_thunhap_hdthe+total_dt_kinhdoanh)) as cp_von_tt2
+	from step2 ;
+
+	-- 1 bảng tạm để kết hợp từ report trên + 2 chỉ số vừa tính được ở trên 
+	-- để tạo ra 1 report cơ bản tính toán các chỉ số 
+	-- dưới procedure chỉ tính toán cả chỉ số tổng hợp 
+	create temp table summary_report as
+	select 
+		r.* , 
+		c.cp_von_CCTG ,
+		t.cp_von_tt2
+	from report1 r 
+	inner join cp_cctgg c 
+	on r.tenkhuvuc = c.tenkhuvuc 
+	inner join cp_tt22 t 
+	on r.tenkhuvuc = t.tenkhuvuc ;
+	
+end ; 
+$$ language plpgsql ;
+~~~
+Finally, I will use a procedure to calculate aggregate metrics and build the summary report from the temporary tables created earlier.
+
+~~~sql
+create or replace procedure gen_final_report(month_pram int ) 
+language plpgsql 
+as $$ 
+begin 
+	perform cp(month_pram ) ; 
+	
+	drop table if exists final_report ; 
+	create table final_report(
+	tenkhuvuc varchar , 
+	"1.Lợi nhuận trước thuế " int8  ,
+	 "Thu nhập từ hoạt động thẻ"  int8 ,
+	 "Lãi trong hạn " int8 ,
+	 "Lãi quá hạn " int8 ,
+	 "Phí Bảo hiểm " int8 ,
+	 "Phí tăng hạn mức " int8 ,
+	" Phí thanh toán chậm, thu từ ngoại bảng, khác… " int8 ,
+	" Chi phí thuần KDV"  int8 ,
+	"CP vốn TT 2 " int8 ,
+	 "CP vốn CCTG  " int8 ,
+	 "Chi phí thuần hoạt động khác"  int8 ,
+	"DT Kinh doanh " int8 ,
+	 "CP hoa hồng "  int8 ,
+	 "CP thuần KD khác " int8 ,
+	"Tổng thu nhập hoạt động" int8 ,
+	"Tổng chi phí hoạt động" int8 ,
+	"CP nhân viên " int8 ,
+	"CP quản lý" int8 ,
+	"CP tài sản" int8 ,
+	"Chi phí dự phòng" int8 ,
+	"2. Số lượng nhân sự ( Sale Manager )" int8 ,
+	"CIR (%)" numeric ,
+	"Margin (%)" numeric ,
+	"Hiệu suất trên/vốn (%)" numeric ,
+	"Hiệu suất BQ/ Nhân sự "numeric 
+	) ;
+
+	insert into final_report
+	with cte1 as (
+select 
+	s1.tenkhuvuc , 
+	(lai_trong_han + lai_qua_han + phi_bao_hiem + phi_tang_han_muc + phi_thanh_toan_cham) as thu_nhap_tu_hd_the , 
+	lai_trong_han , 
+	lai_qua_han ,
+	phi_bao_hiem ,
+	phi_tang_han_muc ,
+	phi_thanh_toan_cham ,
+	(cp_von_tt2 + cp_von_CCTG) as chi_phi_thuan_KDV , 
+	cp_von_tt2 ,
+	cp_von_cctg ,
+	(doanhthu_kinhdoanh + cp_hoahongg + cp_thuankdkhac) as chi_phi_thuan_hd_khac , 
+	doanhthu_kinhdoanh , 
+	cp_hoahongg , 
+	cp_thuankdkhac ,
+	(cp_nhanvienn + cp_quanlyy + cp_taisann) as tong_chi_phi_hoat_dong , 
+	cp_nhanvienn , 
+	cp_quanlyy , 
+	cp_taisann , 
+	cp_duphongg ,
+	s2.sl_nhansu 
+from summary_report s1 
+inner join -- thêm metric số lượng nhân sự 
+	(select 	
+		area_name , 
+		count(sale_name) as sl_nhansu
+	from "ds_ASM" da 
+	group by 1 ) s2 
+on s1.tenkhuvuc = s2.area_name ) 
+, cte2 as (
+select 
+	* ,
+	(thu_nhap_tu_hd_the + chi_phi_thuan_KDV + chi_phi_thuan_hd_khac) as tong_thu_nhap_hd
+from cte1 ) 
+, cte3 as (
+select 
+	* , 
+	(tong_thu_nhap_hd+ tong_chi_phi_hoat_dong+cp_duphongg) as loi_nhuan_truoc_thue ,
+	round((tong_chi_phi_hoat_dong*-1/tong_thu_nhap_hd),2) as CIR , 
+	round((tong_thu_nhap_hd+ tong_chi_phi_hoat_dong+cp_duphongg) / (thu_nhap_tu_hd_the + doanhthu_kinhdoanh) , 2) as Margin ,
+	round((tong_thu_nhap_hd+ tong_chi_phi_hoat_dong+cp_duphongg)*-1 / chi_phi_thuan_KDV  , 2) as hieusuat_von ,
+	round((tong_thu_nhap_hd+ tong_chi_phi_hoat_dong+cp_duphongg)/ sl_nhansu  , 2) as hieusuat_bq 
+from cte2 ) 
+
+select 
+	tenkhuvuc ,
+	loi_nhuan_truoc_thue , 
+	thu_nhap_tu_hd_the ,
+	lai_trong_han ,
+	lai_qua_han ,
+	phi_bao_hiem , 
+	phi_tang_han_muc ,
+	phi_thanh_toan_cham ,
+	chi_phi_thuan_KDV  ,
+	cp_von_tt2 ,
+	cp_von_cctg ,
+	chi_phi_thuan_hd_khac ,
+	doanhthu_kinhdoanh ,
+	cp_hoahongg ,
+	cp_thuankdkhac ,
+	tong_thu_nhap_hd ,
+	tong_chi_phi_hoat_dong ,
+	cp_nhanvienn ,
+	cp_quanlyy ,
+	cp_taisann , 
+	cp_duphongg ,
+	sl_nhansu , 
+	cir , 
+	margin , 
+	hieusuat_von , 
+	hieusuat_bq 
+	from cte3 
+	order by 
+		case 
+			when tenkhuvuc = 'Đông Bắc Bộ' then 1 
+			when tenkhuvuc = 'Tây Bắc Bộ'  then 2
+			when tenkhuvuc = 'Đồng Bằng Sông Hồng' then 3 
+			when tenkhuvuc = 'Bắc Trung Bộ' then 4
+			when tenkhuvuc = 'Nam Trung Bộ' then 5 
+			when tenkhuvuc = 'Tây Nam Bộ' then 6 
+			else 7 
+		end ; 
+	
+	drop table if exists cp_cctgg ;
+	drop table if exists cp_tt22 ;
+	drop table if exists summary_report ;
+end ;
+$$ ;
+~~~
+and resutl after call procedure
+~~~sql
+call gen_final_report(2) ; 
+select * from final_report;
+~~~
+
+| tenkhuvuc           | 1.Lợi nhuận trước thuế             | Thu nhập từ hoạt động thẻ            | Lãi trong hạn      | Lãi quá hạn       | Phí Bảo hiểm       | Phí tăng hạn mức    | Phí thanh toán chậm, thu từ ngoại bảng, khác…                                       | Chi phí thuần KDV | CP vốn TT 2     | CP vốn CCTG      | Chi phí thuần hoạt động khác | DT Kinh doanh        | CP hoa hồng   | CP thuần KD khác | Tổng thu nhập hoạt động               | Tổng chi phí hoạt động | CP nhân viên     | CP quản lý      | CP tài sản      | Chi phí dự phòng  | 2\. Số lượng nhân sự ( Sale Manager ) | CIR (%) | Margin (%) | Hiệu suất trên/vốn (%) | Hiệu suất BQ/ Nhân sự |
+| ------------------- | ---------------------------------- | ------------------------------------ | ------------------ | ----------------- | ------------------ | ------------------- | ----------------------------------------------------------------------------------- | ----------------- | --------------- | ---------------- | ---------------------------- | -------------------- | ------------- | ---------------- | ------------------------------------- | ---------------------- | ---------------- | --------------- | --------------- | ----------------- | ------------------------------------- | ------- | ---------- | ---------------------- | --------------------- |
+| Đông Bắc Bộ         |                      6.679.886.393 |                       77.783.523.764 |     71.210.401.716 |     64.191.654    |   2.248.781.647    |       3.625.425.756 |                                                                         634.722.991 | \-14.882.234.503  | \-1.049.734.026 | \-13.832.500.478 | \-5.181.917.673              |            5.445.450 | \-74.515.640  | \-5.112.847.483  |                        57.719.371.588 | \-10.423.556.244       | \-9.172.655.789  | \-356.162.358   | \-894.738.097   | \-40.615.928.951  | 9                                     | 0,18    | 0,09       | 0,45                   | 742209599,2           |
+| Tây Bắc Bộ          |                      1.628.266.686 |                       43.498.186.792 |     40.355.250.939 |     55.514.989    |      574.178.105   |       2.113.532.018 |                                                                         399.710.741 | \-8.322.459.372   | \-587.033.404   | \-7.735.425.968  | \-3.283.570.980              |            3.400.433 | \-46.315.116  | \-3.240.656.297  |                        31.892.156.440 | \-6.944.913.994        | \-6.115.861.629  | \-240.733.533   | \-588.318.832   | \-23.318.975.760  | 7                                     | 0,22    | 0,04       | 0,2                    | 232609526,6           |
+| Đồng Bằng Sông Hồng |                    17.924.707.036  |                     102.868.422.201  |     96.090.675.424 |     87.499.120    |      944.207.739   |       5.004.389.958 |                                                                         741.649.960 | \-19.681.700.032  | \-1.388.269.363 | \-18.293.430.670 | \-6.254.279.715              |            6.684.151 | \-91.043.735  | \-6.169.920.131  |                        76.932.442.454 | \-15.594.063.360       | \-13.799.752.480 | \-544.890.364   | \-1.249.420.516 | \-43.413.672.058  | 23                                    | 0,2     | 0,17       | 0,91                   | 779335088,5           |
+| Bắc Trung Bộ        |                      4.960.550.205 |                       21.080.562.046 |     19.822.618.842 |           765.223 |         60.962.181 |       1.040.022.295 |                                                                         156.193.505 | \-4.033.320.331   | \-284.494.481   | \-3.748.825.850  | \-1.654.407.348              |            1.774.191 | \-25.259.007  | \-1.630.922.532  |                        15.392.834.367 | \-3.933.761.728        | \-3.477.629.404  | \-136.693.619   | \-319.438.705   | \-6.498.522.434   | 5                                     | 0,26    | 0,24       | 1,23                   | 992110041             |
+| Nam Trung Bộ        |                    15.558.378.739  |                       58.847.327.983 |     54.408.780.960 |     53.184.939    |   1.325.958.386    |       2.789.252.822 |                                                                         270.150.876 | \-11.259.193.368  | \-794.179.018   | \-10.465.014.351 | \-3.229.115.518              |            3.333.393 | \-44.184.241  | \-3.188.264.670  |                        44.359.019.097 | \-6.492.521.569        | \-5.715.311.356  | \-222.914.654   | \-554.295.559   | \-22.308.118.789  | 5                                     | 0,15    | 0,26       | 1,38                   | 3111675748            |
+| Tây Nam Bộ          |                    63.599.626.604  |                     272.049.134.149  |   252.252.873.483  |     63.407.212    |   3.895.335.021    |     12.950.572.262  |                                                                      2.886.946.171  | \-52.050.856.209  | \-3.671.461.756 | \-48.379.394.452 | \-16.705.224.033             |          17.351.807  | \-237.313.124 | \-16.485.262.716 |                     203.293.053.907   | \-30.513.800.136       | \-26.733.389.392 | \-1.026.441.571 | \-2.753.969.173 | \-109.179.627.167 | 16                                    | 0,15    | 0,23       | 1,22                   | 3974976663            |
+| Đông Nam Bộ         | \-18.116.158.486                   |                     114.475.310.392  |   104.784.917.685  |   233.448.619     |   2.485.006.743    |       5.490.859.663 |                                                                      1.481.077.682  | \-21.902.432.953  | \-1.544.911.089 | \-20.357.521.864 | \-7.986.671.241              |            8.582.864 | \-116.750.438 | \-7.878.503.667  |                        84.586.206.198 | \-17.148.940.050       | \-15.110.980.529 | \-589.810.980   | \-1.448.148.541 | \-85.553.424.634  | 19                                    | 0,2     | \-0,16     | \-0,83                 | \-953482025,6         |
+
+After generating the summary report, to resemble the image at the top, please use Excel to pivot the result table so that the columns display similarly to the image, and feel free to apply coloring to enhance its appearance. 😚😚
+
+Thank you for watching until here !!!
+
 
 
 
