@@ -1,7 +1,7 @@
 # Finance Project & Sales KPI
 DataSet Here : [Dowload](https://drive.google.com/drive/folders/1G6pv1hEQ8tt6J4DDxSwUInD5G_U6U_tF?usp=sharing)
 
-Please see this Coding file here : [Coding Details](https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/blob/main/final_fucntion_procedure_prameter_final_report.sql)
+Please see this Coding file here : [Coding Details](https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/blob/main/Coding_SummaryReport.md)
 
 Final Result here : [Final Report - Power Bi](https://app.powerbi.com/view?r=eyJrIjoiMjI3YjE3MTUtYTVmNy00YjQ1LTkzZmYtYmU0NzBmNzU0ZjNkIiwidCI6IjZhYzJhZDA2LTY5MmMtNDY2My1iN2FmLWE5ZmYyYTg2NmQwYyIsImMiOjEwfQ%3D%3D)
 
