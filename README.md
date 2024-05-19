@@ -15,15 +15,15 @@ A summary dashboard reporting monthly results in Power BI
 
 Detailed dashboards on overview , revenue and expenses
 
-<img width="604" alt="anh2" src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/b6073e9a-583e-478b-95dc-0939b1596f6e">
+<img width="604" alt="anh2" src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/b6073e9a-583e-478b-95dc-0939b1596f6e" align="center">
 
-<img width="602" alt="anh3" src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/77c91e08-6ea8-4f25-b919-9bcb13ba27c9">
+<img width="602" alt="anh3" src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/77c91e08-6ea8-4f25-b919-9bcb13ba27c9" align="center">
 
-<img width="605" alt="anh4" src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/12f7486a-301c-4d3e-ae1d-07800eb2935f">
+<img width="605" alt="anh4" src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/12f7486a-301c-4d3e-ae1d-07800eb2935f" align="center">
 
 Dashboards reporting the performance of the sales team
 
-<img width="607" alt="anh5" src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/095738c0-3166-4e78-bdd3-e9ef4e10ecaa">
+<img width="607" alt="anh5" src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/095738c0-3166-4e78-bdd3-e9ef4e10ecaa" align="center">
 
 
 
