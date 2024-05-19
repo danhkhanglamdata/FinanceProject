@@ -56,7 +56,8 @@ The project is processed and analyzed according to the flow below
 </div>
 
 Coding DeTails Here 
-https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/blob/main/final_fucntion_procedure_prameter_final_report.sql
+[Click Here](https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/blob/main/final_fucntion_procedure_prameter_final_report.sql)
+
 
 
 
