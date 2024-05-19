@@ -1,4 +1,10 @@
 # Detailed Coding 
+
+## Table of Contents
+1. [Metrics](#metrics)
+2. [Calculate Report1](#report1)
+3. [Calculate Summary Report](#summaryreport)
+
 <div align="center">
   <img src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/ee48fbe1-b251-470d-a442-de8d185d041e" alt="anh6" width ="503px">
 </div>
@@ -13,6 +19,9 @@ In this file, I will focus on calculating the Summary Report. The `ASM KPI` file
   <img src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/1a4f1f53-2387-428a-9aa2-97083c5e7ecd" alt="anh7" >
 </div>
 
+<div id='metrics' />
+	
+## 1.Metrics
 The Summary Report includes numerous metrics. Some of these are aggregate metrics derived from other metrics. Therefore, I will categorize them into two levels:
 
 #### Level 1 Metrics:
@@ -59,11 +68,10 @@ The Summary Report includes numerous metrics. Some of these are aggregate metric
   - `loi_nhuan_truoc_thue / so_luong_nhansu`
 
 
-## Table of Contents
-1. Calculate REPORT1
-2. Calculate SUMMARY Report
 
-## 1.Calculate REPORT1
+<div id='report1' />
+	
+## 2.Calculate REPORT1
 Below is a diagram illustrating the calculation process in step 1.
 
 <div align="center">
@@ -340,7 +348,9 @@ from report1 ;
 | Tây Nam Bộ          |   252.252.873.483  |     63.407.212    |    3.895.335.021   |           12.950.572.262   |                     2.886.946.171  |                        17.351.807  | \-237.313.124 | \-16.485.262.716 | \-26.733.389.392 | \-1.026.441.571 | \-2.753.969.173 | \-109.179.627.167 |
 | Đông Nam Bộ         |   104.784.917.685  |   233.448.619     |    2.485.006.743   |              5.490.859.663 |                     1.481.077.682  |                          8.582.864 | \-116.750.438 | \-7.878.503.667  | \-15.110.980.529 | \-589.810.980   | \-1.448.148.541 | \-85.553.424.634  |
 
-## 2.Calculate SUMMARY report
+<div id='summaryreport' />
+	
+## 3.Calculate SUMMARY Report 
 Below is a diagram illustrating the calculation process in step 2.
 
 <div align="center">
