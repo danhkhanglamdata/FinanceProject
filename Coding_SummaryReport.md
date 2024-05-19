@@ -13,7 +13,7 @@ As illustrated in the diagram above, this is the process I will follow to produc
 
 To calculate the metrics in the Summary Report, specific business knowledge is required. Below are two files that will support you in understanding the necessary business knowledge: `huondan_data` and `dim_data`
 
-In this file, I will focus on calculating the Summary Report. The `ASM KPI` file will follow a similar process, and I will include the code for it in the repository for reference.
+In this file, I will focus on calculating the Summary Report. The `ASM report` file will follow a similar process, and I will include the code for it in the repository for reference.
 
 <div align="center">
   <img src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/1a4f1f53-2387-428a-9aa2-97083c5e7ecd" alt="anh7" >
