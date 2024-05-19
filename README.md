@@ -22,8 +22,9 @@ This project utilizes data that closely mirrors the financial data of real Vietn
 A summary dashboard reporting monthly results in Power BI
 
 <div align="center">
-  <img src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/db1e8a8b-0ea7-409c-8237-97d46141c3c6" alt="anh1" >
+  <img src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/723c2a02-d57e-4847-a9e5-1e9856f0756b" alt="anh1" >
 </div>
+
 
 ---
 Detailed dashboards on overview , revenue and expenses
