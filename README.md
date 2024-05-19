@@ -38,7 +38,15 @@ Dashboards reporting the performance of the sales team
   <img src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/095738c0-3166-4e78-bdd3-e9ef4e10ecaa" alt="anh4" >
 </div>
 
-
+## Tool & DataSet 
+Tool 
+  - PostgreSQL
+  - Power Bi
+  - Excel
+Dataset
+  - [fact_kpi_month_dataraw](https://docs.google.com/spreadsheets/d/1sELTyYCH3MBwGJjIX1DkhqaRAajrbeHa/edit?usp=drive_link&ouid=115139199657432655686&rtpof=true&sd=true)
+  - [fact_txn_month_dataraw](https://docs.google.com/spreadsheets/d/18cUbKS3JgHgzovk6GWO37n4oNg9FSQ9r/edit?usp=drive_link&ouid=115139199657432655686&rtpof=true&sd=true)
+  - [fact_kpi_sale](https://docs.google.com/spreadsheets/d/1yPTnGnEmi6vzaUjSjJ7Ryib-IwmXgBvp/edit?usp=drive_link&ouid=115139199657432655686&rtpof=true&sd=true)
 
 
 
