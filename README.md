@@ -49,6 +49,18 @@ Dataset
   - [fact_txn_month_dataraw](https://docs.google.com/spreadsheets/d/18cUbKS3JgHgzovk6GWO37n4oNg9FSQ9r/edit?usp=drive_link&ouid=115139199657432655686&rtpof=true&sd=true)
   - [fact_kpi_sale](https://docs.google.com/spreadsheets/d/1yPTnGnEmi6vzaUjSjJ7Ryib-IwmXgBvp/edit?usp=sharing&ouid=115139199657432655686&rtpof=true&sd=true)
 
+## Detailed Approach
+The project is processed and analyzed according to the flow below
+<div align="center">
+  <img src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/ee48fbe1-b251-470d-a442-de8d185d041e" alt="anh6" width ="503px">
+</div>
+
+Coding DeTails Here 
+https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/blob/main/final_fucntion_procedure_prameter_final_report.sql
+
+
+
+
 
 
 
