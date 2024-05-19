@@ -5,17 +5,17 @@ Please see this Coding file here : [Coding Details](https://github.com/danhkhang
 Final Result here : [Final Report - Power Bi](https://app.powerbi.com/view?r=eyJrIjoiMjI3YjE3MTUtYTVmNy00YjQ1LTkzZmYtYmU0NzBmNzU0ZjNkIiwidCI6IjZhYzJhZDA2LTY5MmMtNDY2My1iN2FmLWE5ZmYyYTg2NmQwYyIsImMiOjEwfQ%3D%3D)
 
 ## Table of Contents
-- [Introduction](#introduction)
-- [Result](#result)
-- [Tool&Dataset](#tool&dataset)
-- [Detailed Approach](#detailed-approach)
+1. [Introduction](#intro)
+2. [Result](#result)
+3. [Tool&Dataset](#tool)
+4. [Detailed Approach](#detail)
 
-
+<div id='intro'/>
 ## 1.Introduction 
 ---
 This project utilizes data that closely mirrors the financial data of real Vietnamese enterprises. The goal is to develop financial metrics for companies operating in the financial sector. From these metrics, we aim to create reports and dashboards that provide a comprehensive and detailed overview of the company's revenue and expenses on a monthly basis. Additionally, the project includes reports on the performance of the sales team.
 
-
+<div id='result'/>
 ## 2.Result 
 A summary dashboard reporting monthly results in Power BI
 
@@ -46,6 +46,7 @@ Dashboards reporting the performance of the sales team
   <img src="https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/assets/153256289/095738c0-3166-4e78-bdd3-e9ef4e10ecaa" alt="anh4" >
 </div>
 
+<div id='tool'/>
 ## Tool&DataSet 
 Tool 
   - PostgreSQL
@@ -57,6 +58,7 @@ Dataset
   - [fact_txn_month_dataraw](https://docs.google.com/spreadsheets/d/18cUbKS3JgHgzovk6GWO37n4oNg9FSQ9r/edit?usp=drive_link&ouid=115139199657432655686&rtpof=true&sd=true)
   - [fact_kpi_sale](https://docs.google.com/spreadsheets/d/1yPTnGnEmi6vzaUjSjJ7Ryib-IwmXgBvp/edit?usp=sharing&ouid=115139199657432655686&rtpof=true&sd=true)
 
+<div id='detail'/>
 ## Detailed Approach
 The project is processed and analyzed according to the flow below
 <div align="center">
