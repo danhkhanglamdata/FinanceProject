@@ -1,5 +1,6 @@
 -- Bản cuối cùng có truyền vào tham số để có thể tạo ra final report của từng tháng theo nhu cầu 
-
+-- Các bạn chỉ cần file code này : sau đó truyền vào tham số tháng ở 2 dòng cuối cùng , hiện tại data này cho phép
+-- truyền tham số của 3 tháng đầu năm -> sẽ ra được summary_report nhé
 
 -- Tạo bảng tạm bằng function 
 create or replace
