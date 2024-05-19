@@ -1,4 +1,5 @@
 # Finance Project & Sales KPI
+DataSet Here : [Dowload](https://drive.google.com/drive/folders/1G6pv1hEQ8tt6J4DDxSwUInD5G_U6U_tF?usp=sharing)
 
 Please see this Coding file here : [Coding Details](https://github.com/danhkhanglamdata/FinanceProject-SalesKPI/blob/main/final_fucntion_procedure_prameter_final_report.sql)
 
